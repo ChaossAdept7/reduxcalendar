@@ -32,6 +32,14 @@ export default function (auth={username:"",signedIn:false, status:"",error:""},a
                 status:"done",
                 error:""
             };
+        case 'LOGOUT':
+            return {
+                ...auth,
+                signedIn:false,
+                username:"",
+                id:"",
+                error:""
+            };
         default:
             return auth;
     }

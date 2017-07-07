@@ -17,7 +17,8 @@ const actionTypes = mirrorCreator([
     "DELETING_USER_SUCCESS",
     "SIGNING_IN",
     "SIGNING_IN_SUCCESS",
-    "SIGNING_IN_FAILURE"
+    "SIGNING_IN_FAILURE",
+    "LOGOUT"
 ]);
 
 export default actionTypes;

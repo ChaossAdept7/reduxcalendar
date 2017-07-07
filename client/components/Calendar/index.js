@@ -8,6 +8,10 @@ import {Button, ControlLabel, FormControl, FormGroup, Form} from 'react-bootstra
 import './style.less';
 let grid = [];
 
+//todo - build events first, with margin based on their beginning an with the height by their duration
+//todo - we need in some way set up widths of these events
+//todo - time - we need to display time
+
 for(let i=0; i<=540; i+=30){
     grid.push({name:i});
 }
@@ -36,12 +40,7 @@ class Calendar extends Component{
     render(){
         return <div className="set_height">
             <div className="calendar_container">
-                {
-                    grid.map((el, i)=>{
-                        let hourClass = (parseInt(el.name)%60 == 0)? "even":"odd";
-                        return <div className={`calendar_grid ${hourClass}`} key={i}>{addShift(el)}</div>
-                    })
-                }
+
             </div>
             <div className="add_section">
                 <Button>Add Event</Button>

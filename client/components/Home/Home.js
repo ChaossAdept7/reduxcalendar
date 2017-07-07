@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {login} from './../../redux/actions';
+import {login, logout} from './../../redux/actions';
 import {Button, ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 import './style.less';
 import {Link} from 'react-router-dom';
@@ -33,15 +33,27 @@ class Home extends Component{
     }
 
     logout(){
-        alert("logout");
+        this.props.logout();
     }
 
     render(){
         let logout = null;
+        let home = <div className="login_section view">
+            <FormGroup>
+                <ControlLabel>Username</ControlLabel>
+                <FormControl onChange={this.handleStateChange} name="username" type="text" placeholder="Enter Name" />
+            </FormGroup>
+            <FormGroup>
+                <ControlLabel>Password</ControlLabel>
+                <FormControl onChange={this.handleStateChange} name="password" type="password" placeholder="Enter Password" />
+            </FormGroup>
+            <Button onClick={this.login}>Login</Button>
+        </div>;
         let {id=""} = this.props.auth;
         /* if user is loged in*/
         if(id.length > 0){
             logout = <Button onClick={this.logout}>Logout</Button>
+            home = <FormGroup><h2>Hello, {this.props.auth.username}!</h2></FormGroup>;
         }
         return <div className="app view">
             <div className="add_user_container create_user">
@@ -49,17 +61,7 @@ class Home extends Component{
                     {logout}
                 </div>
             </div>
-            <div className="login_section view">
-                <FormGroup>
-                    <ControlLabel>Username</ControlLabel>
-                    <FormControl onChange={this.handleStateChange} name="username" type="text" placeholder="Enter Name" />
-                </FormGroup>
-                <FormGroup>
-                    <ControlLabel>Password</ControlLabel>
-                    <FormControl onChange={this.handleStateChange} name="password" type="password" placeholder="Enter Password" />
-                </FormGroup>
-                <Button onClick={this.login}>Login</Button>
-            </div>
+            {home}
             <div className="add_user_container">
             </div>
         </div>
@@ -73,6 +75,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         login:bindActionCreators(login, dispatch),
+        logout:bindActionCreators(logout, dispatch),
     }
 }
 

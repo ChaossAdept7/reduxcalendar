@@ -27,3 +27,9 @@ export function login(credentials) {
         payload: credentials
     }
 }
+
+export function logout(){
+    return {
+        type: actionTypes.LOGOUT,
+    }
+}
